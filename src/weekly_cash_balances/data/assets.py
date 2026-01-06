@@ -1,8 +1,8 @@
 import numpy as np
 import polars as pl
 
-from cash_flow.data.utils import get_df_from_json
-from cash_flow.db.db import DuckDB
+from weekly_cash_balances.data.utils import get_df_from_json
+from weekly_cash_balances.db.db import DuckDB
 
 
 class Assets:

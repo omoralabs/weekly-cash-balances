@@ -1,7 +1,7 @@
 import polars as pl
 import requests
 
-from cash_flow.db.db import DuckDB
+from weekly_cash_balances.db.db import DuckDB
 
 
 def get_exchange_rates_per_date(

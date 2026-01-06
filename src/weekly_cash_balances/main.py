@@ -1,5 +1,5 @@
-from cash_flow.data.main import create_sample_data
-from cash_flow.db.db import DuckDB
+from weekly_cash_balances.data.main import create_sample_data
+from weekly_cash_balances.db.db import DuckDB
 
 
 def setup_data() -> None:

@@ -1,7 +1,7 @@
-from cash_flow.data.assets import Assets
-from cash_flow.data.ex_rates import get_exchange_rates_data
-from cash_flow.data.utils import get_df_from_json, get_mondays_2025
-from cash_flow.db.db import DuckDB
+from weekly_cash_balances.data.assets import Assets
+from weekly_cash_balances.data.ex_rates import get_exchange_rates_data
+from weekly_cash_balances.data.utils import get_df_from_json, get_mondays_2025
+from weekly_cash_balances.db.db import DuckDB
 
 
 def insert_currencies() -> None:
