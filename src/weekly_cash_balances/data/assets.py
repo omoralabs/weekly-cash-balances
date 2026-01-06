@@ -21,11 +21,11 @@ class Assets:
         self.create_and_insert_asset_values_df()
 
     def setup_assets_df_main(self) -> None:
-        path = "src/cash_flow/data/sample/assets.json"
+        path = "src/weekly_cash_balances/data/sample/assets.json"
         self.assets_main_df = get_df_from_json(path)
 
     def setup_asset_types_df(self) -> None:
-        path = "src/cash_flow/data/sample/asset_types.json"
+        path = "src/weekly_cash_balances/data/sample/asset_types.json"
         self.asset_types_df = get_df_from_json(path)
 
     def create_and_insert_suppliers_df(self) -> None:

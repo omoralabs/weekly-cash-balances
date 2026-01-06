@@ -5,14 +5,14 @@ from weekly_cash_balances.db.db import DuckDB
 
 
 def insert_currencies() -> None:
-    path = "src/cash_flow/data/sample/currencies.json"
+    path = "src/weekly_cash_balances/data/sample/currencies.json"
     df = get_df_from_json(path)
     with DuckDB() as db:
         db.insert_data(df, "currencies")
 
 
 def insert_currency_pairs() -> None:
-    path = "src/cash_flow/data/sample/currency_pairs.json"
+    path = "src/weekly_cash_balances/data/sample/currency_pairs.json"
     df = get_df_from_json(path)
     with DuckDB() as db:
         db.insert_data(df, "currency_pairs")

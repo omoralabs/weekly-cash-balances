@@ -10,7 +10,7 @@ load_dotenv()
 class DuckDB:
     def __init__(self):
         self._setup_motherduck_token()
-        self.db_name = "cash_flow"
+        self.db_name = "weekly_cash_balances"
         self.create_database()
         self.conn = duckdb.connect(f"md:{self.db_name}")
 
