@@ -9,11 +9,11 @@ asset_values as (
 )
 
 select
-    av.week_start,
+    EXTRACT(YEAR from av.week_start) * 100 + EXTRACT(WEEK from av.week_start) as weeknum,
     ad.account_provider,
     ad.account_id,
     ad.currency,
-    av.value
+    COALESCE(av.value,0) as value
 from asset_data ad
 left join asset_values av on av.asset_id = ad.account_id
 order by av.week_start, ad.account_id
