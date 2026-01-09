@@ -11,7 +11,6 @@ class DuckDB:
     def __init__(self):
         self._setup_motherduck_token()
         self.db_name = "weekly_cash_balances"
-        self.create_database()
         self.conn = duckdb.connect(f"md:{self.db_name}")
 
     def __enter__(self):
@@ -25,10 +24,6 @@ class DuckDB:
             self.conn.commit()
         self.conn.close()
         return False
-
-    def create_database(self):
-        self.conn = duckdb.connect("md:")
-        self.conn.execute(f"CREATE DATABASE IF NOT EXISTS {self.db_name}")
 
     def _setup_motherduck_token(self) -> None:
         """Set up MotherDuck token if available."""
