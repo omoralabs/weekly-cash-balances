@@ -4,7 +4,7 @@ Weekly cash balance tracking with multi-currency reporting built on DuckDB and d
 
 ## Overview
 
-Tracks weekly asset values across multiple currencies with automatic exchange rate conversion. Uses dbt for transforming raw data into reporting-ready views with bidirectional currency conversion.
+Tracks weekly asset values across multiple currencies with automatic exchange rate conversion. Uses dbt for transforming raw data into reporting-ready views with currency conversion.
 
 ## Features
 
@@ -52,7 +52,7 @@ Tracks weekly asset values across multiple currencies with automatic exchange ra
 uv sync
 ```
 
-### Configuration
+### Database
 
 Set `MOTHERDUCK_TOKEN` in `.env` for cloud database access.
 
@@ -86,9 +86,78 @@ weekly-cash-balances/
 └── weekly_cash_balances_dbt/  # dbt project
     ├── models/
     │   ├── intermediate/      # Base rates, reporting rates, currency amounts
-    │   └── converted_cash_balances.sql  # Final multi-currency view
-    └── profiles.yml           # dbt MotherDuck connection
+    │   ├── asset_values_data.sql
+    │   ├── converted_cash_balances.sql
+    │   └── grouped_cash_balances.sql
+    └── dbt_project.yml
 ```
+
+## Architecture
+
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#4A90E2',
+    'primaryTextColor': '#fff',
+    'primaryBorderColor': '#2E5C8A',
+    'lineColor': '#999',
+    'secondaryColor': '#F5A623',
+    'tertiaryColor': '#9B51E0',
+    'background': '#ffffff',
+    'fontSize': '16px',
+    'fontFamily': 'Arial'
+  }
+}}%%
+
+graph TB
+    classDef sourceStyle fill:#E3F2FD,stroke:#1976D2,stroke-width:3px,color:#1976D2
+    classDef autoStyle fill:#FFE0B2,stroke:#E65100,stroke-width:3px,color:#E65100
+    classDef dbStyle fill:#FFF3E0,stroke:#F57C00,stroke-width:3px,color:#F57C00
+    classDef dbtStyle fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px,color:#7B1FA2
+    classDef modelStyle fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#7B1FA2
+    classDef reportStyle fill:#FFF9C4,stroke:#F57F17,stroke-width:3px,color:#F57F17
+    classDef outputStyle fill:#C8E6C9,stroke:#388E3C,stroke-width:3px,color:#388E3C
+
+    A[👥 Balances per Account]:::sourceStyle
+    B[🤖 Automation/Intelligence]:::autoStyle
+    C[💱 Exchange Rates API]:::sourceStyle
+    D[🗄️ DuckDB]:::dbStyle
+    DBT[🔧 dbt Transformations]:::dbtStyle
+
+    E[asset_data]:::modelStyle
+    F[base_rates_data]:::modelStyle
+    G[reporting_rates]:::modelStyle
+    H[currency_amounts]:::modelStyle
+
+    I[asset_values_data]:::modelStyle
+    J[converted_cash_balances]:::modelStyle
+    K[grouped_cash_balances]:::modelStyle
+
+    REP[📈 Reporting Layer]:::reportStyle
+    L[📊 Hex Dashboard]:::outputStyle
+    M[📄 PDF Reports]:::outputStyle
+    N[💬 Slack Alerts]:::outputStyle
+
+    A --> D
+    C --> B
+    B --> D
+    D --> DBT
+    DBT --> E
+    DBT --> F
+    DBT --> G
+    DBT --> H
+    E --> I
+    F --> G
+    G --> H
+    I --> J
+    H --> J
+    J --> K
+    I --> REP
+    J --> REP
+    K --> REP
+    REP --> L
+    REP --> M
+    REP --> N
 
 ## License
 
