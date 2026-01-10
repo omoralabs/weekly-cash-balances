@@ -26,4 +26,4 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [project.scripts]
-weekly-cash-balances = "sweekly_cash_balances.main:main"
+weekly-cash-balances = "weekly_cash_balances.main:main"
