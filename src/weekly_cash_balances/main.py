@@ -2,7 +2,7 @@ from weekly_cash_balances.data.main import create_sample_data
 from weekly_cash_balances.db.db import DuckDB
 
 
-def setup_data() -> None:
+def main() -> None:
     """
     Set up the database schema for assets and its data.
     """
@@ -18,4 +18,4 @@ def setup_data() -> None:
 
 
 if __name__ == "__main__":
-    setup_data()
+    main()
