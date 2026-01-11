@@ -94,4 +94,4 @@ weekly-cash-balances/
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+This project is licensed under the [MIT License](https://opensource.org/license/MIT)
